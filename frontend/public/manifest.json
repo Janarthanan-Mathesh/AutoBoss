@@ -1,0 +1,36 @@
+{
+  "short_name": "AutoBoss",
+  "name": "AutoBoss - Auto Rickshaw Rental & Fleet Management",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "autos-image.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "dashboard-image.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "pwa.png",
+      "type": "image/png",
+      "sizes": "1024x1024",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "theme_color": "#1f2937",
+  "background_color": "#ffffff",
+  "description": "AutoBoss is a modern Auto Rickshaw Rental and Fleet Management app that helps track autos, drivers, rentals, and payments efficiently."
+}

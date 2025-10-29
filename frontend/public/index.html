@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Basic Meta Tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#1f2937" /> <!-- Matches app's dark sidebar -->
+    <meta name="description" content="AutoBoss - Advanced Auto Rickshaw Rental & Fleet Management System. Track rentals, drivers, payments, maintenance, and analytics with real-time dashboards and reports." />
+    <meta name="keywords" content="auto rickshaw, rental management, fleet tracking, driver management, payments, maintenance, analytics, MERN stack" />
+    <meta name="author" content="AutoBoss Team" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- SEO and Social Sharing -->
+    <meta property="og:title" content="AutoBoss - Auto Rickshaw Rental & Fleet Management" />
+    <meta property="og:description" content="Manage autos, drivers, rentals, and profits with intuitive dashboards, charts, and reports. Optimized for mobile and desktop." />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" /> <!-- Add a custom OG image in public/ -->
+    <meta property="og:url" content="https://autoboss-app.com" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AutoBoss - Fleet Management Made Easy" />
+    <meta name="twitter:description" content="Track income, expenses, and EV analytics in one place." />
+    <meta name="twitter:image" content="twitter-image.png" />
+
+    <!-- Security -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;" />
+
+    <!-- Performance: Preload Critical Resources -->
+    <link rel="preload" href="favicon.ico" as="image" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="pwa.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- PWA Service Worker (for offline support) -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js');
+        });
+      }
+    </script>
+
+    <title>AutoBoss - Auto Rickshaw Rental & Fleet Management</title>
+
+    <!-- Inline CSS for Advanced UI/UX (Tailwind-like styles for loading screen and section previews) -->
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+        overflow-x: hidden;
+      }
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.95);
+        z-index: 9999;
+        animation: fadeIn 0.5s ease-in;
+      }
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #e5e7eb;
+        border-top: 5px solid #3b82f6;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      .app-preview {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        width: 90%;
+        max-width: 1200px;
+        height: 80vh;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      .sidebar-preview {
+        background: #1f2937;
+        color: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      .sidebar-preview h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+      }
+      .sidebar-preview ul {
+        list-style: none;
+        padding: 0;
+      }
+      .sidebar-preview li {
+        margin-bottom: 10px;
+      }
+      .sidebar-preview a {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background 0.3s;
+      }
+      .sidebar-preview a:hover {
+        background: #374151;
+      }
+      .sidebar-preview .icon {
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+      }
+      .main-preview {
+        padding: 20px;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 20px;
+      }
+      .dashboard-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+      .card {
+        background: #f9fafb;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .card h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+      .card p {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      .section-placeholder {
+        background: #e5e7eb;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        color: #6b7280;
+      }
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: #3b82f6;
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 4px;
+        z-index: 1000;
+      }
+      .skip-link:focus {
+        top: 6px;
+      }
+      @media (max-width: 768px) {
+        .app-preview {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+        .sidebar-preview {
+          order: 2;
+          flex-direction: row;
+          justify-content: space-around;
+        }
+        .main-preview {
+          order: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Accessibility: Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Advanced Loading Screen with App Section Previews (UI/UX for each section) -->
+    <div id="loading-screen" class="loading-screen" aria-live="polite" role="status">
+      <div class="loading-spinner" aria-hidden="true"></div>
+      <h1 style="margin: 20px 0; font-size: 2rem; color: #1f2937;">Loading AutoBoss...</h1>
+      <p style="margin-bottom: 30px; color: #6b7280;">Preparing your fleet management dashboard</p>
+      
+      <!-- Preview of App UI/UX (Skeleton for sections) -->
+      <div class="app-preview" aria-hidden="true">
+        <!-- Sidebar Preview (Navigation for all sections) -->
+        <div class="sidebar-preview">
+          <h2>AutoBoss</h2>
+          <ul>
+            <li><a href="#dashboard"><img src="dashboard-image.png" alt="Dashboard Icon" class="icon">Dashboard</a></li>
+            <li><a href="#autos"><img src="autos-image.png" alt="Autos Icon" class="icon">Autos</a></li>
+            <li><a href="#drivers"><img src="drivers-image.png" alt="Drivers Icon" class="icon">Drivers</a></li>
+            <li><a href="#rentals"><img src="rentals-image.png" alt="Rentals Icon" class="icon">Rentals</a></li>
+            <li><a href="#payments"><img src="payments-image.png" alt="Payments Icon" class="icon">Payments</a></li>
+            <li><a href="#maintenance"><img src="maintenance-image.png" alt="Maintenance Icon" class="icon">Maintenance</a></li>
+            <li><a href="#reports"><img src="reports-image.png" alt="Reports Icon" class="icon">Reports</a></li>
+          </ul>
+        </div>
+        
+        <!-- Main Content Preview (Specific UI/UX for Dashboard and other sections) -->
+        <div class="main-preview">
+          <h1 style="font-size: 1.5rem; margin-bottom: 10px;">Dashboard Overview</h1>
+          <!-- Dashboard Cards (UI for Dashboard section) -->
+          <div class="dashboard-cards">
+            <div class="card">
+              <h3>Total Autos</h3>
+              <p>10</p>
+            </div>
+            <div class="card">
+              <h3>Total Drivers</h3>
+              <p>5</p>
+            </div>
+            <div class="card">
+              <h3>Active Rentals</h3>
+              <p>3</p>
+            </div>
+            <div class="card">
+              <h3>Monthly Income</h3>
+              <p>$5000</p>
+            </div>
+          </div>
+          
+          <!-- Placeholder for Other Sections (UI/UX hints) -->
+          <div class="section-placeholder">
+            <p><strong>Autos Section:</strong> Manage auto details, upload images, and view EV analytics (battery %, charge cycles).</p>
+            <p><strong>Drivers Section:</strong> Assign drivers to autos, track licenses, and contact info.</p>
+            <p><strong>Rentals Section:</strong> Create rentals, track status (active/completed), and calculate pending rent.</p>
+            <p><strong>Payments Section:</strong> Record payments, view overdue amounts, and export data.</p>
+            <p><strong>Maintenance Section:</strong> Log costs per auto/month, with total expense summaries.</p>
+            <p><strong>Reports Section:</strong> Generate monthly profit reports, export to CSV, and visualize with charts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- React Root (Where the full app renders after loading) -->
+    <div id="root" style="display: none;"></div>
+
+    <!-- JavaScript to Hide Loading Screen Once React Loads -->
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          document.getElementById('loading-screen').style.display = 'none';
+          document.getElementById('root').style.display = 'block';
+        }, 2000); // Simulate loading time; adjust as needed
+      });
+    </script>
+
+    <!-- NoScript Fallback (Advanced UX for no-JS users) -->
+    <noscript>
+      <div style="padding: 20px; text-align: center; background: #f9fafb; color: #333;">
+        <h1>AutoBoss Requires JavaScript</h1>
+        <p>Please enable JavaScript to access the full fleet management features, including dashboards, analytics, and real-time updates.</p>
+        <p>For a basic overview: Visit our sections - Dashboard for stats, Autos for fleet, Drivers for assignments, Rentals for bookings, Payments for tracking, Maintenance for logs, and Reports for exports.</p>
+      </div>
+    </noscript>
+  </body>
+</html>
