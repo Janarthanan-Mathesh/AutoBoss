@@ -5,8 +5,7 @@ const driverSchema = new mongoose.Schema({
   name: { type: String, required: true },
   phone: { type: String, required: true },
   license_no: { type: String, required: true },
-  address: { type: String, required: true },
-  assigned_auto: { type: String, ref: 'Auto' }, // Can be multiple, but simplified to one
+  address: { type: String, required: true }
 });
 
 module.exports = mongoose.model('Driver', driverSchema);
