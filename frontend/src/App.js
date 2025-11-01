@@ -12,30 +12,40 @@ import Sidebar from './components/Sidebar';
 
 const App = () => {
   const token = localStorage.getItem('token');
+
   return (
     <Router>
-      {token ? (
-        <div className="flex">
-          <Sidebar />
-          <div className="flex-1 p-6">
-            <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/autos" element={<Autos />} />
-              <Route path="/drivers" element={<Drivers />} />
-              <Route path="/rentals" element={<Rentals />} />
-              <Route path="/payments" element={<Payments />} />
-              <Route path="/maintenance" element={<Maintenance />} />
-              <Route path="/reports" element={<Reports />} />
-              <Route path="*" element={<Navigate to="/dashboard" />} />
-            </Routes>
-          </div>
-        </div>
-      ) : (
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      )}
+      <Routes>
+        {!token ? (
+          <>
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<Navigate to="/login" />} />
+          </>
+        ) : (
+          <>
+            <Route
+              path="*"
+              element={
+                <div className="flex">
+                  <Sidebar />
+                  <div className="flex-1 p-6">
+                    <Routes>
+                      <Route path="/dashboard" element={<Dashboard />} />
+                      <Route path="/autos" element={<Autos />} />
+                      <Route path="/drivers" element={<Drivers />} />
+                      <Route path="/rentals" element={<Rentals />} />
+                      <Route path="/payments" element={<Payments />} />
+                      <Route path="/maintenance" element={<Maintenance />} />
+                      <Route path="/reports" element={<Reports />} />
+                      <Route path="*" element={<Navigate to="/dashboard" />} />
+                    </Routes>
+                  </div>
+                </div>
+              }
+            />
+          </>
+        )}
+      </Routes>
     </Router>
   );
 };
